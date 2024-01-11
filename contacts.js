@@ -3,12 +3,14 @@ const path = require("path");
 
 const contactsPath = path.join("db", "contacts.json");
 
-async function listContacts() {
-  // ...твій код. Повертає масив контактів.
-}
+const listContacts = async () => {
+  const data = await fs.readFile(contactsPath);
+  return JSON.parse(data);
+};
 
 async function getContactById(contactId) {
-  // ...твій код. Повертає об'єкт контакту з таким id. Повертає null, якщо контакт з таким id не знайдений.
+  const contacts = await listContacts();
+  const result = contacts.find((item) => item.id);
 }
 
 async function removeContact(contactId) {
@@ -18,3 +20,10 @@ async function removeContact(contactId) {
 async function addContact(name, email, phone) {
   // ...твій код. Повертає об'єкт доданого контакту (з id).
 }
+
+module.exports = {
+  listContacts,
+  getContactById,
+  removeContact,
+  addContact,
+};
