@@ -8,7 +8,7 @@ const {
 const { program } = require("commander");
 const fs = require("fs");
 const readline = require("readline");
-//   const program = new Command();
+
 program
   .option("-a, --action <type>", "choose action")
   .option("-i, --id <type>", "user id")
