@@ -1,5 +1,5 @@
 const {
-  listContacts,
+  getContacts,
   getContactById,
   removeContact,
   addContact,
@@ -23,20 +23,20 @@ const argv = program.opts();
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
-      const allContacts = await contacts.listContacts();
+      const allContacts = await getContacts();
       return console.log(allContacts);
 
     case "get":
-      const oneContact = await contacts.getContactById(id);
+      const oneContact = await getContactById(id);
       console.log(oneContact);
 
     case "add":
-      addContact(name, email, phone);
-      break;
+      const newContact = await addContact({ name, email, phone });
+      return console.log(newContact);
 
     case "remove":
-      removeContact(id);
-      break;
+      const removedContact = await removeContact(id);
+      return console.log(removedContact);
 
     default:
       console.warn("\x1B[31m Unknown action type!");
